@@ -32,6 +32,11 @@ describe Kublog::Comment do
       comment = Factory.build(:anonymous_comment)
       comment.author.should == comment.author_name
     end
+    it 'has polymorphic relation to user' do
+      comment = Factory.build(:admin_comment)
+      comment = Factory.build(:admin_comment)
+      comment.user.should be_an Admin
+    end
   end
   
   describe '#as_json' do

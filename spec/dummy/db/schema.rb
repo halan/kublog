@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110901205127) do
+ActiveRecord::Schema.define(:version => 20111004234908) do
+
+  create_table "admins", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.boolean  "admin",           :default => false
+    t.string   "kind",            :default => "semi-cool"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -41,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20110901205127) do
   create_table "kublog_comments", :force => true do |t|
     t.text     "body"
     t.integer  "user_id"
+    t.string   "user_type"
     t.integer  "post_id"
     t.string   "author_name"
     t.string   "author_email"

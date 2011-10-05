@@ -38,6 +38,12 @@ Factory.define :user_comment, :class => Kublog::Comment do |f|
   f.association :post, :factory => :post
 end
 
+Factory.define :admin_comment, :class => Kublog::Comment do |f|
+  f.body 'Great stuff on the blog'
+  f.association :user, :factory => :admin
+  f.association :post, :factory => :post
+end
+
 Factory.define :anonymous_comment, :class => Kublog::Comment do |f|
   f.body 'Great stuff on the site'
   f.author_name 'Adrian Cuadros'
@@ -52,3 +58,7 @@ Factory.define :user do |f|
   f.password_confirmation  'secret'
 end
 
+Factory.define :admin do |f|
+  f.name 'Adrian Cuadros'
+  f.sequence(:email) {|n| "adrian#{n}@innku.com" }
+end
