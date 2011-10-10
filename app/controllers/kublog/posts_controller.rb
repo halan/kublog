@@ -24,6 +24,9 @@ module Kublog
     
     def create
       @post = current_user.posts.build(params[:post])
+      puts 'HERE'
+      puts @post.valid?
+      puts @post.errors.inspect
       if @post.save
         redirect_to @post
       else

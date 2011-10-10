@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20111004234908) do
     t.string   "title"
     t.text     "body"
     t.integer  "user_id"
+    t.string   "user_type"
     t.integer  "category_id"
     t.string   "slug"
     t.datetime "created_at"
