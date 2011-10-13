@@ -1,27 +1,61 @@
 module Kublog
-  class Notification < ActiveRecord::Base    
-    include Network::Email, Network::Facebook, Network::Twitter
-    
+  class Notification < ActiveRecord::Base
+    class Job < Struct.new(:notification_id)
+      def perform
+        Notification.find(notification_id).deliver!
+      end
+    end
+
     belongs_to :post
-    
-    # Presence of content should be responsability
-    # Of each network module
+    serialize  :roles, Array
+    delegate   :title, :url, :user, :to => :post
+
     validates_presence_of :kind
-    
-    after_create  :deliver
-    serialize     :roles, Array
-    
-    delegate      :title, :url, :to => :post
+    validate do
+      errors.add(:content, kind.to_sym) if content.blank?
+    end
+
+    after_create do
+      Kublog.delay_notifications ? Delayed::Job.enqueue(Job.new(id)) : deliver!
+    end
         
     def default?
-      self.send "default_#{kind}"
+      false
+    end
+
+    def email?
+      kind == 'email'
+    end
+
+    def twitter?
+      kind == 'twitter'
+    end
+
+    def facebook?
+      kind == 'facebook'
+    end
+
+    def deliver!
+      send "deliver_#{kind}!"
     end
     
     private
-    
-    def deliver
-      self.send "deliver_#{kind}" if respond_to?("deliver_#{kind}")
+    def deliver_email!
+      users = Kublog.notify_class.constantize.all
+      users.each do |user|
+        if user.notify_post? roles
+          PostMailer.new_post(self, user).deliver
+          increment :times_delivered
+        end
+      end
     end
-    
+
+    def deliver_twitter!
+      Kublog.twitter_client.update [content, url].join(' ')
+    end
+
+    def deliver_facebook!
+      Kublog.facebook_client.link! :link => url, :message => content
+    end
   end
 end

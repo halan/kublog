@@ -9,7 +9,7 @@ Factory.define :category, :class=> Kublog::Category do |f|
 end
 
 Factory.define :notification, :class=> Kublog::Notification  do |f|
-  f.kind    'fake_kind'
+  f.kind    'email'
   f.content 'Awesome post just published'
   f.association :post, :factory => :post
 end

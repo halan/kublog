@@ -13,16 +13,8 @@ require "kublog/engine"
 require "kublog/version"
 
 module Kublog
-  
   autoload   :Notifiable, 'kublog/notifiable'
   autoload   :Author,     'kublog/author'
-  autoload   :Processor,  'kublog/processor'
-  
-  module Network
-    autoload :Email,      'kublog/network/email'
-    autoload :Facebook,   'kublog/network/facebook'
-    autoload :Twitter,    'kublog/network/twitter'
-  end
   
   module XhrUpload
     autoload :FileHelper, 'kublog/xhr_upload/file_helper'
@@ -39,8 +31,8 @@ module Kublog
   mattr_accessor  :user_kinds
   @@user_kinds = []
   
-  mattr_reader    :notification_processing
-  @@notification_processing = :immediately
+  mattr_reader    :delay_notifications
+  @@delay_notifications = false
   
   mattr_accessor  :image_storage
   @@image_storage = :file
@@ -50,13 +42,11 @@ module Kublog
   
   mattr_accessor :notify_class
   @@notify_class =  'User'
-  
-  def self.notification_processing=(method='')
-    @@notification_processing = method.to_sym
-    if @@notification_processing == :delayed_job
-      unless defined? Delayed::Job
-        raise 'You must require delayed_job in your Gemfile to use this feature' 
-      end
+
+  def self.delay_notifications= bool
+    @@delay_notifications = bool
+    if @@delay_notifications && !defined?(Delayed::Job)
+        raise 'You must require delayed_job in your Gemfile to use delay notifications' 
     end
   end
   
@@ -105,5 +95,4 @@ module Kublog
   def self.root_path
     Engine.routes.url_helpers.root_path
   end
-  
 end

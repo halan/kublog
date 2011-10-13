@@ -160,6 +160,7 @@ GEM
       archive-tar-minitar (>= 0.5.2)
     sanitize (2.0.3)
       nokogiri (< 1.6, >= 1.4.4)
+    shoulda (2.11.3)
     simple_oauth (0.1.5)
     sprockets (2.0.0)
       hike (~> 1.2)
@@ -189,4 +190,5 @@ DEPENDENCIES
   kublog!
   rspec-rails
   ruby-debug19
+  shoulda
   sqlite3

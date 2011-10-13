@@ -8,10 +8,10 @@ Kublog.setup do |config|
   config.default_url_options = {:host => "www.kublog.com"}
   
   #Delivers Post Notification as soon as created
-  config.notification_processing = {:development => :immediate,
-                                    :test => :immediate,
-                                    :staging => :delayed_job,
-                                    :production => :delayed_job }[Rails.env.to_sym]
+  # config.notification_processing = {:development => :immediate,
+  #                                   :test => :immediate,
+  #                                   :staging => :delayed_job,
+  #                                   :production => :delayed_job }[Rails.env.to_sym]
                                     
   #Types of users in your app to segment notfications
   config.user_kinds = %w(cool semi-cool lame)

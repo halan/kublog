@@ -9,6 +9,7 @@ require 'rspec/rails'
 require 'factory_girl'
 require 'factories'
 require 'json'
+require 'shoulda'
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
