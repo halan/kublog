@@ -4,7 +4,7 @@ $(document).ready ->
     resetErrors()
   
   $('#kublog #new_kublog_comment').bind 'ajax:success', (xhr, data, status)->
-    $('.post-comments').append(commentTemplate(data))
+    $('.post-comments').append(commentTemplate(data.comment))
     $(this).find('textarea,input[type=text]').val('')
     
   $('#kublog #new_kublog_comment').bind 'ajax:error', (xhr, error, status)->
