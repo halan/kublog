@@ -12,7 +12,7 @@ module Kublog
     private
     
     def set_default_alt
-      self.alt = file_url.match(/([\w|\b|\s\-]+)\.[png|jpg|gif|jpeg]+/)[1]
+      self.alt = file.filename
     end
     
     def get_dimensions

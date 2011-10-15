@@ -42,7 +42,6 @@ module Kublog
     end
     
     private
-    
     def body_with_content
       errors.add(:body, :blank) if blank_body?
     end
@@ -51,6 +50,5 @@ module Kublog
     def blank_body?
       Sanitize.clean(self.body).gsub(/[ | ]/, '').blank? 
     end
-    
   end
 end

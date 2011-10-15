@@ -17,6 +17,7 @@ module Kublog
 
     after_create do
       Kublog.delay_notifications ? Delayed::Job.enqueue(Job.new(id)) : deliver!
+      # Kublog.delay_notifications ? delay.deliver! : deliver!
     end
         
     def default?

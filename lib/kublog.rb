@@ -5,7 +5,7 @@ require "twitter"
 require "fb_graph"
 require "friendly_id"
 require "carrierwave"
-require "RMagick"
+require "mini_magick"
 require "liquid"
 require "sanitize"
 
@@ -15,10 +15,6 @@ require "kublog/version"
 module Kublog
   autoload   :Notifiable, 'kublog/notifiable'
   autoload   :Author,     'kublog/author'
-  
-  module XhrUpload
-    autoload :FileHelper, 'kublog/xhr_upload/file_helper'
-  end
   
   module UserIntegration
     autoload :Common, 'kublog/user_integration/common'

@@ -1,7 +1,5 @@
 module Kublog
   class ImagesController < ApplicationController
-    include XhrUpload::FileHelper
-    
     before_filter  :set_image_file, :only => :create
     
     def create
@@ -37,8 +35,12 @@ module Kublog
     private
     
     def set_image_file
-      params[:image] ||= {:file => received_file}
+      file = {
+        :filename => env['HTTP_X_FILE_NAME'],
+        :type     => env["CONTENT_TYPE"],
+        :tempfile => env['rack.input'] 
+      }
+      params[:image] = {:file => file} 
     end
-    
   end
 end

@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "sanitize", '~>2.0.3'
   
   # This gems should stop being dependencies but optional with certain features
-  s.add_runtime_dependency "rmagick", '~>2.13.1'
+  s.add_runtime_dependency "mini_magick", '~>3.3'
   s.add_runtime_dependency "carrierwave", '~>0.5.7'
   s.add_runtime_dependency 'liquid', '~>2.2.2'
   s.add_runtime_dependency 'twitter', '~>1.6.2'

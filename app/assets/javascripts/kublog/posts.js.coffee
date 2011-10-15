@@ -38,7 +38,7 @@ $(document).ready ->
   # Server optional Hidden Fields (Currently Twitter and Facebook)
   $('#kublog .trigger-optional').change ->
     $optional = $(this).siblings('.optional')
-    if $(this).attr('checked')?
+    if $(this).is(':checked')
       $optional.show().find('[disabled]').attr('disabled', false)
     else
       $optional.hide().find('textarea, input').attr('disabled', true)

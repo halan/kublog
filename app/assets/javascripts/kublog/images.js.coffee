@@ -10,13 +10,13 @@ $(document).ready ->
     $(this).ajaxyUpload
      url : "#{kublogPath}images.json"
      success : (data) ->
-       $('#image_id').val(data.id)
-       $('#image_alt').val(data.alt)
+       image = data.image
+       $('#image_id').val(image.id)
+       $('#image_alt').val(image.alt)
        $('#image-upload input').attr('disabled',false)
-       showUploadedImage(data.file)
-       enableSelect($('#image-upload select'), data)
-       setImageUrls(data.file)
-       console.log(data)
+       showUploadedImage(image.file)
+       enableSelect($('#image-upload select'), image)
+       setImageUrls(image.file)
      start : ->
        $('#image-upload input.upload').attr('disabled',true)
        console.log('Starts Uploading')

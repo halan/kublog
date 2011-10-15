@@ -4,7 +4,7 @@ $(document).ready ->
   $('#kublog .email_checkbox').change ->
     $optional = $(this).siblings('.optional')
     $optional_lightbox = $(this).siblings('.optional_lightbox')
-    if $(this).attr('checked')?
+    if $(this).is(':checked')
       $optional.show().find('[disabled]').attr('disabled', false)
       $optional.find('input[type=checkbox]').attr('checked',true)
       $optional_lightbox.find('[disabled]').attr('disabled', false)
@@ -30,7 +30,7 @@ $(document).ready ->
   $('#kublog .post_form').submit ->
     $email_checkbox = $('.email_checkbox')
     $email_content = $('.email_content')
-    if $email_checkbox.attr('checked')? && not $email_content.data('ready')
+    if $email_checkbox.is(':checked') && not $email_content.data('ready')
       $email_content.val($(this).data('post'))
       $('#link-to-email-template').click()
       return false

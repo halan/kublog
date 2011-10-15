@@ -6,12 +6,13 @@ $(document).ready ->
       new_name = prompt('New category name')
       if new_name?
         $.post "#{kublogPath}categories", {category: {name: new_name}}, (data)->
-          $(optionTemplate(data)).insertAfter($select.find('option:first'))
-          $select.val(data.id)
+          category = data.category
+          $(optionTemplate(category)).insertAfter($select.find('option:first'))
+          $select.val(category.id)
           if $select.find('optgroup option').length is 0
-            $select.append(optGroupTemplate(data))
+            $select.append(optGroupTemplate(category))
           else
-            $select.find('optgroup').prepend(optionTemplate(data))
+            $select.find('optgroup').prepend(optionTemplate(category))
       else
         $select.val('')
     else if $select.find('option:selected').parent('optgroup').length isnt 0
