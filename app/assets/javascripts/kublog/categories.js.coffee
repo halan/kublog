@@ -38,8 +38,9 @@ $(document).ready ->
     new_name = prompt($(this).attr('data-prompt'), $link.text())
     if new_name?
       $.post $link.attr('href'), {_method: 'put', category: {name: new_name}}, (data)->
-        $link.text(data.name)
-        $link.attr('href', data.path)
+        category = data.category
+        $link.text(category.name)
+        $link.attr('href', category.path)
     return false
     
 optionTemplate = (category) ->

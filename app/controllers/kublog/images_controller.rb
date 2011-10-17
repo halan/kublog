@@ -33,7 +33,6 @@ module Kublog
     end
     
     private
-    
     def set_image_file
       file = {
         :filename => env['HTTP_X_FILE_NAME'],

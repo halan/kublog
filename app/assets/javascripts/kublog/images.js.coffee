@@ -17,11 +17,10 @@ $(document).ready ->
        showUploadedImage(image.file)
        enableSelect($('#image-upload select'), image)
        setImageUrls(image.file)
+       console.log(image)
      start : ->
        $('#image-upload input.upload').attr('disabled',true)
-       console.log('Starts Uploading')
      complete : ->
-       console.log('Finished Uploading')
      error : ->
        alert('Error uploading')
 
@@ -29,7 +28,7 @@ $(document).ready ->
   $('#kublog #image-upload input[type=submit]').click ->
     url = "#{kublogPath}images/#{$('#image_id').val()}.json"
     attributes = {_method: 'put', image: { alt: $('#image_alt').val() } }
-    $.post url, attributes , (data) ->
+    $.post url, attributes, (data) ->
       image = { url: $('#image-upload option:selected').attr('data-url'), alt: data.alt  }
       $.wysiwyg.insertHtml $('#kublog #post_body'), imageTemplate(image)
       resetUploadForm()
@@ -46,7 +45,6 @@ $(document).ready ->
     
 showUploadedImage = (image)->
   $('#image-upload img').attr('src', image.small.url)
-  $('#image-upload .container').append(linkTemplate(image))
 
 setImageUrls = (image)->
   $('#image-upload option[value=original]').attr('data-url', image.url)
@@ -67,11 +65,8 @@ resetUploadForm = ->
   $('#image-upload small').remove()
   $('#image-upload input[type=text]').val('').attr('disabled', true)
   $('#image-upload input[type=file]').attr 'disabled', false 
-  $('#image-upload img').attr 'src', "/assets#{kublogPath}missing_image.png"
+  $('#image-upload img').attr 'src', ""
 
 # Templates
 imageTemplate = (image) ->
   "<p><img src='#{image.url}' alt='#{image.alt}' /></p>"
-
-linkTemplate = (image) ->
-  "<small><a href='#{image.url}' target='_blank' style='display:block'>View Original</a></small>"
