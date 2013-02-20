@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "mini_magick", '~>3.3'
   s.add_runtime_dependency "carrierwave", '~>0.5.7'
   s.add_runtime_dependency 'liquid', '~>2.2.2'
-  s.add_runtime_dependency 'twitter', '~>1.6.2'
+  s.add_runtime_dependency 'twitter', '~>3.5.0'
   s.add_runtime_dependency 'fb_graph', '~>1.9.5'
   
   # Development dependencies
